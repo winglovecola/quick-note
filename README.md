@@ -20,7 +20,7 @@ Quick note, a simple and efficient way to create reminder or to do list. Create 
 
 ## Preview
 
-![Screenshot](https://github.com/winglovecola/quick-note/blob/main/assets/images/screenshot.jpg?raw=true)
+![Screenshot](https://github.com/winglovecola/quick-note/blob/main/public/assets/images/screenshot.jpg?raw=true)
 
 
 
