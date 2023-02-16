@@ -16,7 +16,7 @@ const readFile = (dir, filename) =>
   new Promise((resolve, reject) => {
     //read file
     let currentDir = path.join(__dirname, dir);
-    let filePath = currentDir + "\\" + filename;
+    let filePath = currentDir + "/" + filename;
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -47,7 +47,7 @@ const readFile = (dir, filename) =>
         else
         {
             //save file
-            let filePath = currentDir + "\\" + filename;
+            let filePath = currentDir + "/" + filename;
 
             fs.writeFile(filePath, data, (err) => {
                 err ? reject('Failed to save to database\n\n' + err) : resolve('Successfully saved to database:\n\n' + filePath);

@@ -27,7 +27,7 @@ app.get('/notes', (req, res) =>
 
 app.get('/api/notes', (req, res) => {
   
-  utility.readFile("..\\db", "db.json").then ((data) => {
+  utility.readFile("../db", "db.json").then ((data) => {
     
     res.json(data);
   });
@@ -43,14 +43,14 @@ app.delete('/api/notes/:id', (req, res) => {
   {
     
 
-    utility.readFile("..\\db", "db.json").then ((data) => {
+    utility.readFile("../db", "db.json").then ((data) => {
 
       const loadedData = JSON.parse(data);
   
       const filterData = loadedData.filter(entry => entry.id != deleteId); //must use != operate to remove the that item if using filter function
   console.log (filterData);
 
-      utility.saveFile (JSON.stringify (filterData), "..\\db", "db.json").then ((data) => {
+      utility.saveFile (JSON.stringify (filterData), "../db", "db.json").then ((data) => {
   
   
         if (data.indexOf ("success") !== false)
@@ -81,14 +81,14 @@ app.delete('/api/notes/:id', (req, res) => {
 app.post('/api/notes', (req, res) => {
   console.log('Got body:', req.body);
 
-  utility.readFile("..\\db", "db.json").then ((data) => {
+  utility.readFile("../db", "db.json").then ((data) => {
 
     loadedData = JSON.parse(data);
 
     const {title, text} = req.body;
     loadedData.push ({id: utility.uuid (), title: title, text:text});
 
-    utility.saveFile (JSON.stringify (loadedData), "..\\db", "db.json").then ((data) => {
+    utility.saveFile (JSON.stringify (loadedData), "../db", "db.json").then ((data) => {
 
       console.log(data);
 
