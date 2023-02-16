@@ -11,7 +11,7 @@ const utility = require('./js-server/utility');
 // Allows us to reference files with their relative path
 // Example: http://localhost:3000/images/cat.jpg
 
-const PORT = process.env.port || 3001;
+const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(express.static('public'));
 
