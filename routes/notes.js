@@ -29,21 +29,21 @@ routeNote.delete('/:id', (req, res) => {
       const loadedData = JSON.parse(data);
   
       const filterData = loadedData.filter(entry => entry.id != deleteId); //must use != operate to remove the that item if using filter function
-        console.log (filterData);
+        //console.log (filterData);
 
       utility.saveFile (JSON.stringify (filterData), "../db", "db.json").then ((data) => {
   
   
         if (data.indexOf ("success") !== false)
         {
-          console.log ("deleteId:" +  deleteId);
+          //console.log ("deleteId:" +  deleteId);
           
           const response = {
             status: 'success',
             body: data,
           };
         
-          console.log(response);
+          //console.log(response);
           res.status(201).json(response);
     
         } else {
@@ -60,7 +60,7 @@ routeNote.delete('/:id', (req, res) => {
 
 //post /api/notes
 routeNote.post('/', (req, res) => {
-  console.log('Got body:', req.body);
+  //console.log('Got body:', req.body);
 
   utility.readFile("../db", "db.json").then ((data) => {
 
@@ -71,7 +71,7 @@ routeNote.post('/', (req, res) => {
 
     utility.saveFile (JSON.stringify (loadedData), "../db", "db.json").then ((data) => {
 
-      console.log(data);
+      //console.log(data);
 
 
 
@@ -82,7 +82,7 @@ routeNote.post('/', (req, res) => {
           body: data,
         };
       
-        console.log(response);
+        //console.log(response);
         res.status(201).json(response);
   
       } else {

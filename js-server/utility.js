@@ -3,11 +3,10 @@ const path = require('path');
 
 
 function uuid () {
-
+    //use the unix timestamp to make sure the id is unique
     return Math.floor((1 + Math.random()) * 0x10000)
     .toString(16)
     .substring(1) + "-" + Math.floor(new Date().getTime() / 1000);
-
 }
 
 

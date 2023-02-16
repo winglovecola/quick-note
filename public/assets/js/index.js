@@ -8,13 +8,19 @@ if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
+  saveNewNoteBtn = document.querySelector('.save-new-note');
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
+  noteTips = document.querySelector('.note-tips');
 }
 
 // Show an element
 const show = (elem) => {
   elem.style.display = 'inline';
+};
+
+const showBlock = (elem) => {
+  elem.style.display = 'block';
 };
 
 // Hide an element
@@ -52,17 +58,27 @@ const deleteNote = (id) =>
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
+  hide(saveNewNoteBtn);
+  
 
   if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
+
+    hide (noteTips);
   } else {
     noteTitle.removeAttribute('readonly');
+    noteTitle.focus ();
+    
     noteText.removeAttribute('readonly');
+
     noteTitle.value = '';
     noteText.value = '';
+
+
+    showBlock (noteTips);
   }
 };
 
@@ -96,7 +112,7 @@ const handleNoteDelete = (e) => {
   }
 
 
-  console.log ("noteId: " +noteId)
+  //console.log ("noteId: " +noteId)
   deleteNote(noteId).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -119,8 +135,11 @@ const handleNewNoteView = (e) => {
 const handleRenderSaveBtn = () => {
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     hide(saveNoteBtn);
+    hide(saveNewNoteBtn);
+    
   } else {
     show(saveNoteBtn);
+    show(saveNewNoteBtn);
   }
 };
 
@@ -130,8 +149,8 @@ const renderNoteList = async (notes) => {
 
   jsonNotes = JSON.parse (jsonNotesStr);
 
-  console.log ("jsonNotes: ", jsonNotes);
-  console.log ("type: ", typeof jsonNotes);
+  //console.log ("jsonNotes: ", jsonNotes);
+  //console.log ("type: ", typeof jsonNotes);
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
@@ -156,7 +175,7 @@ const renderNoteList = async (notes) => {
         'fas',
         'fa-trash-alt',
         'float-right',
-        'text-danger',
+        'btn-color',
         'delete-note'
       );
       //delBtnEl.setAttribute ('data-note', '');
@@ -190,9 +209,15 @@ const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
+  saveNewNoteBtn.addEventListener('click', handleNoteSave);
+  
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
+
+
+  if (!activeNote.id) 
+    noteTitle.focus ();
 }
 
 getAndRenderNotes();
