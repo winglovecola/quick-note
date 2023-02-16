@@ -3,8 +3,9 @@ const utility = require('../js-server/utility');
 const fs = require ('fs');
 const path = require('path');
 
-//app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/public/')));
 
+
+//get /api/notes
 routeNote.get('/', (req, res) => {
   
   utility.readFile("../db", "db.json").then ((data) => {
@@ -14,6 +15,8 @@ routeNote.get('/', (req, res) => {
   
 });
 
+
+//delete /api/notes:id
 routeNote.delete('/:id', (req, res) => {
   
   const deleteId = req.params.id;
@@ -21,8 +24,6 @@ routeNote.delete('/:id', (req, res) => {
   
   if (deleteId != "" && deleteId != undefined)
   {
-    
-
     utility.readFile("../db", "db.json").then ((data) => {
 
       const loadedData = JSON.parse(data);
@@ -53,11 +54,11 @@ routeNote.delete('/:id', (req, res) => {
       })
       
     });
-  
   }
 });
 
 
+//post /api/notes
 routeNote.post('/', (req, res) => {
   console.log('Got body:', req.body);
 
@@ -92,9 +93,6 @@ routeNote.post('/', (req, res) => {
     })
     
   });
-
-  
-
 });
 
 
